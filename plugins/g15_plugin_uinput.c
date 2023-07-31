@@ -153,43 +153,108 @@ void keydown(unsigned char code) { printf("Extra Keys not supported due to missi
 #endif
 
 static void g15_process_keys(g15daemon_t *masterlist, unsigned int currentkeys, unsigned int lastkeys){
+
+// keycode -8 
+#define XF86AudioMute		113
+#define XF86AudioLowerVolume	114
+#define XF86AudioRaiseVolume	115
+#define XF86AudioNext		163
+#define XF86AudioPlay		164
+#define XF86AudioPrev		165
+#define XF86AudioStop		166
+#define XF86AudioMicMute	190
+
 	/* 'G' keys */
 	if((currentkeys & G15_KEY_G1) && !(lastkeys & G15_KEY_G1))
-		keydown(GKEY_OFFSET);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioPlay);
+		else
+			keydown(GKEY_OFFSET);
 	else if(!(currentkeys & G15_KEY_G1) && (lastkeys & G15_KEY_G1))
-		keyup(GKEY_OFFSET);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioPlay);
+		else
+			keyup(GKEY_OFFSET);
 	if((currentkeys & G15_KEY_G2) && !(lastkeys & G15_KEY_G2))
-		keydown(GKEY_OFFSET+1);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioStop);
+		else
+			keydown(GKEY_OFFSET+1);
 	else if(!(currentkeys & G15_KEY_G2) && (lastkeys & G15_KEY_G2))
-		keyup(GKEY_OFFSET+1);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioStop);
+		else
+			keyup(GKEY_OFFSET+1);
 	if((currentkeys & G15_KEY_G3) && !(lastkeys & G15_KEY_G3))
-		keydown(GKEY_OFFSET+2);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioPrev);
+		else
+			keydown(GKEY_OFFSET+2);
 	else if(!(currentkeys & G15_KEY_G3) && (lastkeys & G15_KEY_G3))
-		keyup(GKEY_OFFSET+2);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioPrev);
+		else
+			keyup(GKEY_OFFSET+2);
 	if((currentkeys & G15_KEY_G4) && !(lastkeys & G15_KEY_G4))
-		keydown(GKEY_OFFSET+3);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioNext);
+		else
+			keydown(GKEY_OFFSET+3);
 	else if(!(currentkeys & G15_KEY_G4) && (lastkeys & G15_KEY_G4))
-		keyup(GKEY_OFFSET+3);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioNext);
+		else
+			keyup(GKEY_OFFSET+3);
 	if((currentkeys & G15_KEY_G5) && !(lastkeys & G15_KEY_G5))
-		keydown(GKEY_OFFSET+4);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioMute);
+		else
+			keydown(GKEY_OFFSET+4);
 	else if(!(currentkeys & G15_KEY_G5) && (lastkeys & G15_KEY_G5))
-		keyup(GKEY_OFFSET+4);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioMute);
+		else
+			keyup(GKEY_OFFSET+4);
 	if((currentkeys & G15_KEY_G6) && !(lastkeys & G15_KEY_G6))
-		keydown(GKEY_OFFSET+5);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioRaiseVolume);
+		else
+			keydown(GKEY_OFFSET+5);
 	else if(!(currentkeys & G15_KEY_G6) && (lastkeys & G15_KEY_G6))
-		keyup(GKEY_OFFSET+5);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioRaiseVolume);
+		else
+			keyup(GKEY_OFFSET+5);
 	if((currentkeys & G15_KEY_G7) && !(lastkeys & G15_KEY_G7))
-		keydown(GKEY_OFFSET+6);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioLowerVolume);
+		else
+			keydown(GKEY_OFFSET+6);
 	else if(!(currentkeys & G15_KEY_G7) && (lastkeys & G15_KEY_G7))
-		keyup(GKEY_OFFSET+6);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioLowerVolume);
+		else
+			keyup(GKEY_OFFSET+6);
 	if((currentkeys & G15_KEY_G8) && !(lastkeys & G15_KEY_G8))
-		keydown(GKEY_OFFSET+7);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioMute);
+		else
+			keydown(GKEY_OFFSET+7);
 	else if(!(currentkeys & G15_KEY_G8) && (lastkeys & G15_KEY_G8))
-		keyup(GKEY_OFFSET+7);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioMute);
+		else
+			keyup(GKEY_OFFSET+7);
 	if((currentkeys & G15_KEY_G9) && !(lastkeys & G15_KEY_G9))
-		keydown(GKEY_OFFSET+8);
+		if(currentkeys & G15_EXTENDED_KEY)
+			keydown(XF86AudioMicMute);
+		else
+			keydown(GKEY_OFFSET+8);
 	else if(!(currentkeys & G15_KEY_G9) && (lastkeys & G15_KEY_G9))
-		keyup(GKEY_OFFSET+8);
+		if(lastkeys & G15_EXTENDED_KEY)
+			keyup(XF86AudioMicMute);
+		else
+			keyup(GKEY_OFFSET+8);
 	if((currentkeys & G15_KEY_G10) && !(lastkeys & G15_KEY_G10))
 		keydown(GKEY_OFFSET+9);
 	else if(!(currentkeys & G15_KEY_G10) && (lastkeys & G15_KEY_G10))
